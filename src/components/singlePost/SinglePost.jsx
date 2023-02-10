@@ -13,7 +13,7 @@ export default function SinglePost() {
   const [updatemode, setUpdatemode] = useState(false);
   const path = location.pathname.split("/")[2];
   const { currentuser,host } = useContext(Blogcontext);
-  const PF="http://localhost:5000/images/"
+  const PF=`${host}/images/`
 
   useEffect(() => {
     const getpost = async () => {

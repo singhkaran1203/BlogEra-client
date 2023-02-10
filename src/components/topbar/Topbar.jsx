@@ -4,9 +4,9 @@ import { useContext,useState } from "react";
 import Blogcontext from "../../context/blogcontext";
 
 export default function Topbar() {
-  const {currentuser,setCurrentuser} = useContext(Blogcontext)
+  const {currentuser,setCurrentuser,host} = useContext(Blogcontext)
   const [toggle, setToggle] = useState(false)
-  const PF="http://localhost:5000/images/"
+  const PF=`${host}/images/`;
   const handlelogout=(e)=>{
     e.preventDefault();
     setCurrentuser(null);

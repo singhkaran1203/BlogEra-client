@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import Blogcontext from "../../context/blogcontext";
 import "./post.css";
 
 export default function Post(props) {
-  const PF="http://localhost:5000/images/"
+  const {host}=useContext(Blogcontext);
+  const PF=`${host}/images/`
   return (
     <div className="post">
       {props.data.photo && (

@@ -14,7 +14,7 @@ export default function Settings() {
     password:""
   });
 
-  const PF = "http://localhost:5000/images/";
+  const PF = `${host}/images/`
 
   const handlesubmit = async (e) => {
     e.preventDefault();
