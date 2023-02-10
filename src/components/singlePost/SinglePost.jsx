@@ -12,12 +12,12 @@ export default function SinglePost() {
   const [desc, setDesc] = useState("");
   const [updatemode, setUpdatemode] = useState(false);
   const path = location.pathname.split("/")[2];
-  const { currentuser } = useContext(Blogcontext);
+  const { currentuser,host } = useContext(Blogcontext);
   const PF="http://localhost:5000/images/"
 
   useEffect(() => {
     const getpost = async () => {
-      const res = await axios.get("/api/post/" + path);
+      const res = await axios.get(`${host}/api/post/` + path);
       setpost(res.data);
       setTitle(res.data.title);
       setDesc(res.data.description);
@@ -27,7 +27,7 @@ export default function SinglePost() {
 
   const handledelete = async () => {
     try {
-      await axios.delete(`/api/post/${post._id}`, {
+      await axios.delete(`${host}/api/post/${post._id}`, {
         data: { userid: currentuser._id },
       });
       history.push("/");
@@ -36,7 +36,7 @@ export default function SinglePost() {
 
   const handleupdate=async()=>{
     try{
-      await axios.put("/api/post/"+path,{title:title,description:desc,userid:currentuser._id});
+      await axios.put(`${host}/api/post/`+path,{title:title,description:desc,userid:currentuser._id});
       await setUpdatemode(false);
     }catch(err){}
   }

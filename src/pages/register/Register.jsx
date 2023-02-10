@@ -1,9 +1,11 @@
 import "./register.css";
-import { useState } from "react";
+import { useState,useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Blogcontext from "../../context/blogcontext";
 
 export default function Register() {
+  const {host}=useContext(Blogcontext)
   const [userinfo, setUserinfo] = useState({
     username: "",
     email: "",
@@ -13,7 +15,7 @@ export default function Register() {
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/register", userinfo);
+      const res = await axios.post(`${host}/api/auth/register`, userinfo);
       res.data && window.location.replace("/login");
     } catch (err) {
       window.alert("something went wrong !!");

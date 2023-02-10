@@ -1,14 +1,15 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
+import Blogcontext from "../../context/blogcontext";
 import "./sidebar.css";
 
 export default function Sidebar() {
   const [cats, setCats] = useState([]);
-
+  const {host}=useContext(Blogcontext);
   useEffect(() => {
     const getcats = async () => {
-      const respo = await axios.get("/api/categories");
+      const respo = await axios.get(`${host}/api/categories`);
       setCats(respo.data);
     };
     getcats();

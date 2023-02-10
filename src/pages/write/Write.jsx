@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 
 export default function Write() {
-  const {currentuser}=useContext(Blogcontext);
+  const {currentuser,host}=useContext(Blogcontext);
   const history=useHistory();
   const [file, setfile] = useState(null)
   const [postinfo, setpostinfo] = useState({
@@ -26,12 +26,12 @@ export default function Write() {
       postinfo.photo=filename;
       // console.log(postinfo)
       try{
-        await axios.post("/api/upload",data)
+        await axios.post(`${host}/api/upload`,data)
       }catch(err){}
     }
 
     try{
-      const res=await axios.post("/api/post",postinfo)
+      const res=await axios.post(`${host}/api/post`,postinfo)
       console.log(res.data);
       history.push("/");
     }

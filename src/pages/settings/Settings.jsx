@@ -5,7 +5,7 @@ import Blogcontext from "../../context/blogcontext";
 import axios from "axios";
 
 export default function Settings() {
-  const { currentuser } = useContext(Blogcontext);
+  const { currentuser,host } = useContext(Blogcontext);
   const [file, setFile] = useState(null);
   const [updateduser, setUpdateduser] = useState({
     userID:currentuser._id,
@@ -25,12 +25,12 @@ export default function Settings() {
       data.append("file",file);
       updateduser.profilePic=filename;
       try{
-        await axios.post("/api/upload",data);
+        await axios.post(`${host}/api/upload`,data);
       }
       catch(err){}
     }
     try{
-      const res= await axios.put("/api/user/"+currentuser._id,updateduser)
+      const res= await axios.put(`${host}/api/user/`+currentuser._id,updateduser)
       localStorage.setItem("bloguser",JSON.stringify(res.data));
       window.location.replace("/");
     }

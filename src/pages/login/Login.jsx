@@ -7,14 +7,14 @@ import Blogcontext from "../../context/blogcontext";
 export default function Login() {
   const userRef = useRef();
   const passRef = useRef();
-  const { setCurrentuser }=useContext(Blogcontext);
+  const { setCurrentuser,host }=useContext(Blogcontext);
   const history=useHistory()
 
   const handlesubmit = async (e) => {
     e.preventDefault();
     // console.log(userRef.current.value)
     try {
-      const res = await axios.post("/api/auth/login", {
+      const res = await axios.post(`${host}/api/auth/login`, {
         email: userRef.current.value,
         password: passRef.current.value,
       });
