@@ -3,10 +3,12 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useContext, useState } from "react";
 import Blogcontext from "../../context/blogcontext";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Settings() {
   const { currentuser,host } = useContext(Blogcontext);
   const [file, setFile] = useState(null);
+  const history = useHistory();
   const [updateduser, setUpdateduser] = useState({
     userID:currentuser._id,
     username:currentuser.username,
@@ -14,25 +16,21 @@ export default function Settings() {
     password:""
   });
 
-  const PF = `${host}/images/`
-
   const handlesubmit = async (e) => {
     e.preventDefault();
     if(file){
       const data=new FormData();
-      const filename=Date.now()+file.name;
-      data.append("name",filename);
-      data.append("file",file);
-      updateduser.profilePic=filename;
+      data.append("img",file);
       try{
-        await axios.post(`${host}/api/upload`,data);
+        const res = await axios.post(`${host}/api/upload`,data);
+        updateduser.profilePic=res.data;
       }
       catch(err){}
     }
     try{
       const res= await axios.put(`${host}/api/user/`+currentuser._id,updateduser)
       localStorage.setItem("bloguser",JSON.stringify(res.data));
-      window.location.replace("/");
+      history.push("/");
     }
     catch(err){
       window.alert("enter your information correctly");
@@ -51,7 +49,7 @@ export default function Settings() {
           <div className="settingsPP">
             <img
               src={
-                file ? URL.createObjectURL(file) : currentuser.profilePic && PF + currentuser.profilePic
+                file ? URL.createObjectURL(file) : currentuser.profilePic && currentuser.profilePic
               }
               alt=""
             />

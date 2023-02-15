@@ -13,7 +13,6 @@ export default function SinglePost() {
   const [updatemode, setUpdatemode] = useState(false);
   const path = location.pathname.split("/")[2];
   const { currentuser,host } = useContext(Blogcontext);
-  const PF=`${host}/images/`
 
   useEffect(() => {
     const getpost = async () => {
@@ -45,7 +44,7 @@ export default function SinglePost() {
     <div className="singlePost">
       <div className="singlePostWrapper">
         {post.photo && (
-          <img className="singlePostImg" src={PF+post.photo} alt="" />
+          <img className="singlePostImg" src={post.photo} alt="" />
         )}
 
         {updatemode ? (

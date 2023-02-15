@@ -6,7 +6,6 @@ import Blogcontext from "../../context/blogcontext";
 export default function Topbar() {
   const {currentuser,setCurrentuser,host} = useContext(Blogcontext)
   const [toggle, setToggle] = useState(false)
-  const PF=`${host}/images/`;
   const handlelogout=(e)=>{
     e.preventDefault();
     setCurrentuser(null);
@@ -40,7 +39,7 @@ export default function Topbar() {
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src={currentuser.profilePic && PF+currentuser.profilePic}
+              src={currentuser.profilePic && currentuser.profilePic}
               alt=""
             />
           </Link>

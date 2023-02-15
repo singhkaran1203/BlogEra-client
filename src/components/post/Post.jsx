@@ -5,11 +5,10 @@ import "./post.css";
 
 export default function Post(props) {
   const {host}=useContext(Blogcontext);
-  const PF=`${host}/images/`
   return (
     <div className="post">
       {props.data.photo && (
-        <img className="postImg" src={PF+props.data.photo} alt="" />
+        <img className="postImg" src={props.data.photo} alt="" />
       )}
       <div className="postInfo">
         <div className="postCats">

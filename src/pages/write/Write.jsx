@@ -20,13 +20,12 @@ export default function Write() {
     e.preventDefault();
     if(file){
       const data=new FormData();
-      const filename=Date.now()+file.name;
-      data.append("name",filename);
-      data.append("file",file);
-      postinfo.photo=filename;
+      data.append("img",file);
       // console.log(postinfo)
       try{
-        await axios.post(`${host}/api/upload`,data)
+        const res=await axios.post(`${host}/api/upload`,data)
+        // console.log(res.data);
+        postinfo.photo=res.data;
       }catch(err){}
     }
 
