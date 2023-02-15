@@ -39,7 +39,7 @@ export default function Topbar() {
           <Link className="link" to="/settings">
             <img
               className="topImg"
-              src={currentuser.profilePic && currentuser.profilePic}
+              src={currentuser.profilePic}
               alt=""
             />
           </Link>
